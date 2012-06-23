@@ -1,0 +1,27 @@
+!!!
+extends layout
+block append scripts
+	script(src='/javascripts/main.js')
+	script.
+		var listKey = "#{args.listKey};"
+		var salt = "#{args.salt};"
+block content
+	div#controls
+	div#entryList
+	div#templates
+		div.newRecord
+			input.url
+			input.login
+			div.passwordGenerator
+				input.password
+				select.maximumLen
+					option(value="10") 10
+					option(value="14") 14
+					option(value="16") 16
+					option(value="20", selected="selected") 20
+					option(value="25") 25
+					option(value="30") 30
+					option(value="50") 50
+				input(type="checkbox", checked="true").useSpecials
+				input(type="submit", value="Generate").generate
+			input(type="submit", value="Add").add		

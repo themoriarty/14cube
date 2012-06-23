@@ -1,0 +1,13 @@
+!!!
+extends layout
+block content
+	form(method="POST", action="/login")
+		div.userinput
+			span Username:  
+			input(type="text", name="username")
+		div.userinput
+			span Password:  
+			input(type="password", name="password")
+		input(type="hidden", name="_csrf", value=token)		
+		input(type="submit", value="Log in")
+		
