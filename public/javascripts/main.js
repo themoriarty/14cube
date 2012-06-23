@@ -56,7 +56,9 @@ MainController.prototype.createControls = function(){
 	return false;
     });
     $("#controls .searchText").focusin(function(){
-	$("#controls .searchText").attr("value", "");
+	if ($("#controls .searchText").attr("value") == $("#templates .searchText").attr("value")){
+	    $("#controls .searchText").attr("value", "");
+	}
     });
     $("#controls .searchText").focusout(function(){
 	if (!$("#controls .searchText").attr("value")){

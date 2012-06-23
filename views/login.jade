@@ -1,5 +1,22 @@
 !!!
 extends layout
+block append scripts
+	script.
+		function refreshTicket(){
+			$.get("/rnd", {bytes: 0}, function(data){
+				$("input[name=_csrf]").attr("value", data.token);
+				$("input[type=submit]").removeAttr("disabled");
+				$("form").submit();
+			});
+		}
+		$(document).ready(function(){
+			$("input[type=submit]").click(function(e){
+				$(this).attr("disabled", "disabled");
+				refreshTicket();
+				return false;
+			});	
+		});
+
 block content
 	form(method="POST", action="/login")
 		div.userinput
@@ -8,6 +25,6 @@ block content
 		div.userinput
 			span Password:  
 			input(type="password", name="password")
-		input(type="hidden", name="_csrf", value=token)		
+		input(type="hidden", name="_csrf")
 		input(type="submit", value="Log in")
 		
