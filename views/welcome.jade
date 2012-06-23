@@ -9,19 +9,33 @@ block content
 	div#controls
 	div#entryList
 	div#templates
-		div.newRecord
-			input.url
-			input.login
-			div.passwordGenerator
-				input.password
-				select.maximumLen
-					option(value="10") 10
-					option(value="14") 14
-					option(value="16") 16
-					option(value="20", selected="selected") 20
-					option(value="25") 25
-					option(value="30") 30
-					option(value="50") 50
-				input(type="checkbox", checked="true").useSpecials
-				input(type="submit", value="Generate").generate
-			input(type="submit", value="Add").add		
+		div.search.span-24.last.append-bottom
+			div.searchHeader.span-24.last
+				span.span-6 Quick search
+			div.searchBody.span-24.last
+				input(value="Start typing to begin the search").span-10.searchText.quiet
+			
+		div.newRecord.span-24.last
+			div.newRecordHeader.span-24.last
+				span.span-6 Url
+				span.span-5 Username
+				span Password
+			div.newRecordBody.span-20.last
+				input.url.span-6
+				input.login.span-5
+				input.password.span-6
+				input(type="submit", value="Add  ").add.last
+			div.newRecordBody2.push-11.span-6.last
+				span.span-5
+					select.maximumLen.span-3
+						option(value="10") 10 symbols
+						option(value="14") 14 symbols
+						option(value="16") 16 symbols
+						option(value="20", selected="selected") 20 symbols
+						option(value="25") 25 symbols
+						option(value="30") 30 symbols
+						option(value="50") 50 symbols
+					input(type="checkbox", checked="true").useSpecials
+					span &nbsp;$#%^	
+				a(href="", style="margin-right: 0.2em").generate.buttonSymbol.right ⟳
+				

@@ -37,7 +37,7 @@ MainController.prototype.createControls = function(){
 		   login: $("#controls .login").attr("value"), 
 		   password: $("#controls .password").attr("value")};
 	self.newObject(obj, function(){
-	    $("#controls > .newRecord > :input[type != submit]").attr("value", "");
+	    $("#controls .newRecord :input[type != submit]").filter(":not(select)").attr("value", "");
 	});
     });
     $("#controls .generate").click(function(){
@@ -46,11 +46,51 @@ MainController.prototype.createControls = function(){
 	generatePassword(len, useSpecials, function(v){
 	    $("#controls .password").attr("value", v);
 	});
+	return false;
+    });
+
+    $("#templates > .search").clone().appendTo("#controls");
+    $("#controls .doSearch").click(function(){
+	var text = $("#controls .searchText").attr("value");
+	console.log(text);
+	return false;
+    });
+    $("#controls .searchText").focusin(function(){
+	$("#controls .searchText").attr("value", "");
+    });
+    $("#controls .searchText").focusout(function(){
+	if (!$("#controls .searchText").attr("value")){
+	    $("#controls .searchText").attr("value", $("#templates .searchText").attr("value"));
+	}
+    });
+    $("#controls .searchText").keyup(function(event){
+	if (event.keyCode == 13)
+	{
+	    var buttons = $("#entryList .entryButton:visible");
+	    if (buttons.size() == 1){
+		buttons.click();
+	    }
+	}
+	var text = $("#controls .searchText").attr("value");
+	setTimeout(function(){
+	    if ($("#controls .searchText").attr("value") == text)
+	    {
+		text = text.toLowerCase();
+		$(".entry").each(function(){
+		    if ($(this).find(".entryUrl").attr("value").toLowerCase().indexOf(text) == -1){
+			$(this).hide();
+		    } else{
+			$(this).show();
+		    }
+		});
+	    }
+	}, 300);
     });
 };
+
 MainController.prototype.refreshUrlList = function(){
     var self = this;
-    var newContent = $("<div>")
+    var newContent = $("<div>");
     for (var url in self.urls){
 	newContent.append($("<div>").addClass("entry")
 			  .append($("<input>").addClass("entryUrl").attr("value", url))
@@ -93,6 +133,7 @@ MainController.prototype.start = function(){
 	} else{
 	    self.urls = {};
 	}
+	$("#controls .searchText").focus();
     });
 };
 

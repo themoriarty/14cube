@@ -41,6 +41,6 @@ app.post("/put", r.put)
 app.get("/rnd", r.rnd)
 app.get("/nrnd", r.nrnd)
 
-app.listen(8888, function(){
-    console.log("started");
+app.listen(settings.port, function(){
+    console.log("started on port " + settings.port);
 });

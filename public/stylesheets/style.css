@@ -1,21 +1,34 @@
 body {
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  /*font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;*/
+  font: 14px "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 a {
   color: #00B7FF;
+  text-decoration: none;
 }
-
+#templates{
+    display: none;
+}
+/*
 .entryLogin{
     margin: 10pt;
 }
 .entryPassword{
     margin: 10pt;
 }
-#templates{
-    display: none;
-}
+
 .passwordGenerator{
     display: inline;
 }
+
+#input.span-1, textarea.span-1 { width: 18px; }
+*/
+select{
+    margin-top: 0px;
+}
+
+.buttonSymbol{
+    font-size: 1.2em;
+} 
