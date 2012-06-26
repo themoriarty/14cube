@@ -27,6 +27,21 @@ function put(ckey, key, value, cb){
     }, "json");
     return;
 }
+function getToken(cb){
+    $.get("/rnd", {bytes: 0}, function(data){
+	cb(data.token);
+    });
+}
+
+function purge(ckey, key, cb){
+    $.get("/rnd", {bytes: 0}, function(data){
+	console.log(key);
+	$.post("/purge", {key: key,
+			  "_csrf": data.token}, function(d){
+			      cb(false);
+			  }, "json");
+    });
+}
 
 function generatePassword(len, useSpecials, cb){
     var symbols = "";
@@ -53,6 +68,20 @@ function generatePassword(len, useSpecials, cb){
     }, "json");
 }
 
+function sanitizeUrl(t){
+    // TODO proper schema validation
+    if (t.indexOf("http://") != -1 && 
+	t.indexOf("https://") != -1 &&
+	t.indexOf("ftp://") != -1){
+	t = "http://" + t;
+    }
+    return $("<div>").text(t).text();
+}
+
 function reportError(msg){
     console.log(msg);
+}
+
+function reportUserError(msg){
+    $("#controls .userError").text(msg);
 }

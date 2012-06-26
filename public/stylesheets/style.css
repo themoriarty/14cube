@@ -32,3 +32,15 @@ select{
 .buttonSymbol{
     font-size: 1.2em;
 } 
+.entryUrl{
+    cursor: pointer;
+}
+.entry2body{
+    display: none;
+}
+.entry2confirmation{
+    display: none;
+}
+.userError{
+    color: red;
+}

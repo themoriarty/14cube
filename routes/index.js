@@ -30,6 +30,10 @@ module.exports = function(settings, storage){
 	    }
 	});
     };
+    Routes.prototype.logout = function(req, res){
+	req.session.destroy();
+	res.send(200);
+    };
 
     Routes.prototype.authFailed = function(req, res){
 	res.render("authFailed", {title: "Authentification failed"});
@@ -37,8 +41,7 @@ module.exports = function(settings, storage){
 
     Routes.prototype.get = function(req, res){
 	if (!req.session || !req.session.username){
-	    res.render("login", {title: "Login"});
-	    return;
+	    return res.send(403);
 	}
 	storage.get(req.session.username, req.param("key"), function(err, result){
 	    if (err){
@@ -51,11 +54,24 @@ module.exports = function(settings, storage){
     }
     Routes.prototype.put = function(req, res){
 	if (!req.session || !req.session.username){
-	    res.render("login", {title: "Login"});
-	    return;
+	    return res.send(403);
 	}
 	req.session._csrf = undefined;
 	storage.put(req.session.username, req.param("key"), req.param("value"), function(err){
+	    if (err){
+		console.error(err);
+		res.send(503);
+	    } else{
+		res.json(200, {error: ""});
+	    }
+	});
+    }
+    Routes.prototype.purge = function(req, res){
+	if (!req.session || !req.session.username){
+	    return res.send(403);
+	}
+	req.session._csrf = undefined;
+	storage.purge(req.session.username, req.param("key"), function(err){
 	    if (err){
 		console.error(err);
 		res.send(503);

@@ -17,5 +17,9 @@ html(lang = "en")
       div#content
         block content
       block footer
-        a(href="/") home
+        div.footer.span-24
+          div.footerLinks.span-4.right.last
+            block footerLinks
+              a(href="/").span-2.first.small Home
+            
 

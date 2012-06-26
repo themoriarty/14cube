@@ -35,11 +35,13 @@ app.configure('production', function(){
 r = new Routes();
 app.get('/', r.index);
 app.post('/login', r.login);
+app.post('/logout', r.logout);
 app.get('/authFailed', r.authFailed);
-app.get("/get", r.get)
-app.post("/put", r.put)
-app.get("/rnd", r.rnd)
-app.get("/nrnd", r.nrnd)
+app.get("/get", r.get);
+app.post("/put", r.put);
+app.post("/purge", r.purge);
+app.get("/rnd", r.rnd);
+app.get("/nrnd", r.nrnd);
 
 app.listen(settings.port, function(){
     console.log("started on port " + settings.port);

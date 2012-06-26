@@ -28,5 +28,11 @@ module.exports = function(settings){
 					     });
     };
 
+    Storage.prototype.purge = function(username, key, cb){
+	// note username is not used
+	connection.collection("data").remove({"_id": key}, function(err){
+	    cb(err);
+	});
+    };
     return Storage;
 };
