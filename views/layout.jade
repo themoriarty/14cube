@@ -3,23 +3,25 @@ html(lang = "en")
   head
     title some title
     link(rel='stylesheet', href='/stylesheets/blueprint/screen.css', media="screen, projection")
-    link(rel='stylesheet', href='/stylesheets/blueprint/screen.css', media="screen, projection")
     link(rel='stylesheet', href='/stylesheets/blueprint/print.css', media="print")
-    // if lt IE8
-      link(rel='stylesheet', href='/stylesheets/blueprint/ie.css', media="screen, projection")
     link(rel='stylesheet', href='/stylesheets/style.css')
     block scripts
       script(src='/javascripts/jquery.js')
       script(src='/javascripts/utilities.js')
       
   body
-    div.container.box.showgrid2
-      div#content
-        block content
+    div#bodyContent
+      div#header
+        div#headerContainer.container
+          span blah
+      div#contentBox
+        div#content.container.box.showgrid2
+          block content
       block footer
-        div.footer.span-24
-          div.footerLinks.span-4.right.last
-            block footerLinks
-              a(href="/").span-2.first.small Home
+        div#footer
+          div#footerContainer.container
+            div#footerLinks.span-4.right.last
+              block footerLinks
+                a(href="/").span-2.first Home
             
 

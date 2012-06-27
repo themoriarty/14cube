@@ -139,7 +139,7 @@ MainController.prototype.refreshUrlList = function(){
     }
     $("#entryList").html(newContent);
     $(".entryUrl").click(function(){
-	if ($(this).parent().parent().find(".entryLogin").attr("value"))
+	if ($(this).parent().parent().find(".entryLogin:visible").size() > 0)
 	{	    
 	    var thisObj = this;
 	    $(this).parent().siblings(".entry2body").slideUp('fast', function(){
@@ -161,7 +161,7 @@ MainController.prototype.refreshUrlList = function(){
 	return false;
     });
     $(".entry2Delete").click(function(){
-	if ($(this).parent().siblings(".entry2confirmation").find(".confirmationText").text())
+	if ($(this).parent().siblings(".entry2confirmation").find(".confirmationText:visible").size() > 0)
 	{
 	    var thisObj = this;
 	    $(this).parent().siblings(".entry2confirmation").slideUp('fast', function(){

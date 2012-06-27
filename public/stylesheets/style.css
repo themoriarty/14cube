@@ -1,9 +1,14 @@
-body {
-  padding: 50px;
-  /*font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;*/
-  font: 14px "Helvetica Neue", Helvetica, Arial, sans-serif;
+html, body {
+    height: 100%;
+    margin: 0px;
+    /*font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;*/
+    font: 14px "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
-
+#bodyContent{
+    height: auto;
+    position: relative;
+    min-height:100%;
+}
 a {
   color: #00B7FF;
   text-decoration: none;
@@ -11,20 +16,7 @@ a {
 #templates{
     display: none;
 }
-/*
-.entryLogin{
-    margin: 10pt;
-}
-.entryPassword{
-    margin: 10pt;
-}
 
-.passwordGenerator{
-    display: inline;
-}
-
-#input.span-1, textarea.span-1 { width: 18px; }
-*/
 select{
     margin-top: 0px;
 }
@@ -44,3 +36,28 @@ select{
 .userError{
     color: red;
 }
+.center{
+    text-align: center;
+}
+#content{
+    margin-top: 5em;
+    margin-bottom: 1em;
+}
+#contentBox{
+    padding: 1em 1em 5em;
+}
+#header, #footer{
+    float:left;
+    padding:15px 0;
+    min-width:100%;
+    background: none repeat scroll 0% 0% rgb(102, 102, 102);
+    margin-top: 0em;
+}
+#footer{
+    position: absolute;
+    bottom: 0px;
+}
+.box {
+    background: rgb(230, 230, 230);
+}
+
