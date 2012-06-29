@@ -1,5 +1,3 @@
-var password = "this is my password";
-
 function MainController(ckey){
     this._ckey = ckey;
 }
@@ -79,6 +77,7 @@ MainController.prototype.createControls = function(){
 	    $("#controls .searchText").attr("value", $("#templates .searchText").attr("value"));
 	}
     });
+    $("#controls .searchForm").submit(function(){return false;});
     $("#controls .searchText").keyup(function(event){
 	if (event.keyCode == 13)
 	{
@@ -203,6 +202,18 @@ MainController.prototype.start = function(){
     });
 };
 
+function getPassword(cb){
+    return cb("this is my password");
+    $("#templates .passwordBox").clone().appendTo("#content");
+    $("#content .storagePassword").focus();
+    $("#content .storagePasswordForm").submit(function(){
+	var pass = $(this).find(".storagePassword").attr("value");
+	$("#content .passwordBox").remove();
+	cb(pass);
+	return false;
+    });
+}
+
 function main(){
     $.getScript("/javascripts/crypto/rollups/aes.js", function(){
 	$.getScript("/javascripts/crypto/rollups/pbkdf2.js", function(){
@@ -214,9 +225,11 @@ function main(){
 		});
 		return false;
 	    });
-	    var ckey = CryptoJS.PBKDF2(password, salt, { keySize: 256/32, iterations: 1000 });
-	    var m = new MainController(ckey);
-	    m.start();
+	    getPassword(function(password){
+		var ckey = CryptoJS.PBKDF2(password, salt, { keySize: 256/32, iterations: 1000 });
+		var m = new MainController(ckey);
+		m.start();
+	    });
 	});
     });
 };

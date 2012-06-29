@@ -8,7 +8,12 @@ function get(ckey, key, cb){
 	if (data && data.value){
 	    obj = JSON.parse(data.value);
 	    iv = CryptoJS.enc.Hex.parse(obj.iv);
-	    value = CryptoJS.AES.decrypt(obj.value, ckey, {iv: iv}).toString(CryptoJS.enc.Utf8);
+	    try{
+		value = CryptoJS.AES.decrypt(obj.value, ckey, {iv: iv}).toString(CryptoJS.enc.Utf8);
+	    } catch(e){
+		cb('Incorrect storage password', undefined);
+		return;
+	    }
 	    cb(undefined, JSON.parse(value));
 	    return;
 	}
@@ -70,18 +75,21 @@ function generatePassword(len, useSpecials, cb){
 
 function sanitizeUrl(t){
     // TODO proper schema validation
-    if (t.indexOf("http://") != -1 && 
-	t.indexOf("https://") != -1 &&
-	t.indexOf("ftp://") != -1){
+    if (t.indexOf("http://") == -1 && 
+	t.indexOf("https://") == -1 &&
+	t.indexOf("ftp://") == -1){
 	t = "http://" + t;
     }
     return $("<div>").text(t).text();
 }
 
-function reportError(msg){
-    console.log(msg);
+function reportError(msg){    
+    $("#content").html($("<h4>").addClass("userError").text(msg));
+    $("<a>").attr("href", "/").text("Home").appendTo($("#content"));
+    return false;
 }
 
 function reportUserError(msg){
     $("#controls .userError").text(msg);
+    return false;
 }

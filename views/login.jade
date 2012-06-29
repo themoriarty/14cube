@@ -18,13 +18,25 @@ block append scripts
 		});
 
 block content
-	form(method="POST", action="/login")#loginForm
-		div.userinput
-			span Username:  
-			input(type="text", name="username")
-		div.userinput
-			span Password:  
-			input(type="password", name="password")
-		input(type="hidden", name="_csrf")
-		input(type="submit", value="Log in")
+	div#signIn.span6
+		h1 Sign in
+		form(method="POST", action="/login")#loginForm.well.form-inline
+			div.userinput
+				input(type="text", name="username", placeholder="Username").input-large
+			div.userinput
+				input(type="password", name="password", placeholder="Password").input-large
+			input(type="hidden", name="_csrf")
+			input(type="submit", value="Sign in").btn
+	div#signUp.span6
+		h1 Sign up
+		form(method="POST", action="/login")#loginForm.well.form-inline
+			div.userinput
+				input(type="text", name="username", placeholder="Username").input-large
+			div.userinput
+				input(type="password", name="password", placeholder="Password").input-large
+			div.userinput
+				input(type="password", name="password", placeholder="Repeat password").input-large
+			input(type="hidden", name="_csrf")
+			input(type="submit", value="Sign in").btn
+
 		

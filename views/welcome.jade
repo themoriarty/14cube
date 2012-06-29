@@ -7,67 +7,64 @@ block append scripts
 		var salt = "#{args.salt};"
 
 block append footerLinks
-	a(href="").logOut.span-2.last Log out
+	a(href="").logOut.span1 Log out
 
 block content
 	div#controls
-	div#entryList.span-24.last
+	div#entryList.row
 	div#templates
-		div.entry.span-24.last
-			a(href="", target="_blank").entryUrl.span-6
-			input(type="submit", value=">>").entryButton.span-2
-			input("readonly", "readonly").entryLogin.span-6
-			input("readonly", "readonly").entryPassword.span-6
-			a(href="").entryDelete.span-1.buttonSymbol.last ✕
-		div.entry2.span-8
-			div.entry2header.span-8
-				h6.span-6.entryUrl
-				a(href="", title="Open the site", target="_blank").entry2Go.span-1.buttonSymbol ↗
-				a(href="", title="Delete this record").entry2Delete.span-1.buttonSymbol.last ✕
-			div.entry2body.span-8
-				//div.entry2body1.span-8
-					span.span-4.first username
-					span.span-4.last password:
-				div.entry2body2.span-8
-					input.entryLogin.span-3.first
-					input.entryPassword.span-5.last
-			div.entry2confirmation.span-8.last
-					span.confirmationText.span-7.first
-					a(href="").span-1.entry2confirmationOk.last yes
-					a(href="").span-1.right.entry2confirmationCancel.last no
-		div.entry2Container.span-8
-		div.entry2FullContainer.span-24
+		div.passwordBox.span6.offset3
+			form.storagePasswordForm.well.form-inline
+				input(type="password", placeholder="Storage password").storagePassword
+				input(type="submit", value="Enter").storagePasswordOk.btn
+		div.entry2.span4
+			div.entry2header.span4
+				h5.span3.entryUrl
+				a(href="", title="Open the site", target="_blank").entry2Go.buttonSymbol ↗
+				a(href="", title="Delete this record").entry2Delete.buttonSymbol ✕
+			div.entry2body.span4
+				div.entry2body2.span4
+					input.entryLogin.span-3
+					input.entryPassword.span-5
+			div.entry2confirmation.span4
+					span.confirmationText.span-7
+					a(href="").span-1.entry2confirmationOk yes
+					a(href="").span-1.right.entry2confirmationCancel no
+		div.entry2Container.span4
+		div.entry2FullContainer.span12
 
-		div.search.span-24.last.append-bottom
-			div.searchHeader.span-24.last
-				span.span-6 Quick search
-			div.searchBody.span-24.last
-				input(value="Start typing to begin the search").span-10.searchText.quiet
+		div.search.span12
+			form.well.searchForm
+				label Quick search
+				input(type="text", value="Start typing to begin the search").span5.searchText
 			
-		div.newRecord.span-24.last
-			div.newRecordHeader.span-24.last
-				span.span-6 Url
-				span.span-5 Username
-				span Password
-			div.newRecordBody.span-24
-				input.url.span-6
-				input.login.span-5
-				div.passwordGenerator.span-6
-					input.password.span-6
-					span.span-5
-						select.maximumLen.span-3
-							option(value="10") 10 symbols
-							option(value="14") 14 symbols
-							option(value="16") 16 symbols
-							option(value="20", selected="selected") 20 symbols
-							option(value="25") 25 symbols
-							option(value="30") 30 symbols
-							option(value="50") 50 symbols
-						input(type="checkbox", checked="true").useSpecials
-						span &nbsp;$#%^	
-					a(href="", style="margin-right: 0.2em").generate.buttonSymbol.right ⟳
-				div.span-7.last
-					input(type="submit", value="Add  ").add.last
-					span.span-7.last.userError
+		div.newRecord.span10.offset1
+				form.newRecordBody.well.form-inline
+					div.control-group
+						input(placeholder="Url").url.span3
+					div.control-group
+						input(placeholder="Login").login.span2
+					div.control-group
+						div
+							input(placeholder="Password").password.span3
+						div
+							select(style="width: 110px").maximumLen.span2
+								option(value="10") 10 symbols
+								option(value="14") 14 symbols
+								option(value="16") 16 symbols
+								option(value="20", selected="selected") 20 symbols
+								option(value="25") 25 symbols
+								option(value="30") 30 symbols
+								option(value="50") 50 symbols
+							a(href="", style="margin-right: 0.2em").generate.buttonSymbol.right ⟳
+							span(style="margin-right: 15px").right
+								span &nbsp;$#%^	
+								input(type="checkbox", checked="true").useSpecials
+					div.control-group
+						div
+							input(type="submit", value="Add  ").add.btn.span1
+						div
+							span.userError
+
 
 				

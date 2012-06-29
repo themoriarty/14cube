@@ -9,17 +9,17 @@ html, body {
     position: relative;
     min-height:100%;
 }
-a {
+/*a {
   color: #00B7FF;
   text-decoration: none;
-}
+}*/
 #templates{
     display: none;
 }
 
-select{
+/*select{
     margin-top: 0px;
-}
+}*/
 
 .buttonSymbol{
     font-size: 1.2em;
@@ -39,12 +39,18 @@ select{
 .center{
     text-align: center;
 }
+/*
 #content{
     margin-top: 5em;
     margin-bottom: 1em;
 }
 #contentBox{
     padding: 1em 1em 5em;
+}
+*/
+.newRecordBody .control-group{
+    display: inline-block; 
+    vertical-align: top;
 }
 #header, #footer{
     float:left;
@@ -61,3 +67,12 @@ select{
     background: rgb(230, 230, 230);
 }
 
+.first{
+    margin-left: 0px;
+}
+.last{
+    margin-right: 0px;
+}
+.right{
+    float: right;
+}
