@@ -4,6 +4,7 @@ html(lang = "en")
     title some title
     link(rel='stylesheet', href='/stylesheets/bootstrap.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
+    //link(rel='stylesheet', href='/stylesheets/debug.css')
     block scripts
       script(src='/javascripts/jquery.js')
       script(src='/javascripts/utilities.js')
@@ -12,7 +13,7 @@ html(lang = "en")
     div#bodyContent
       div#header
         div#headerContainer.container
-          span blah
+          h3 14cube
       div#contentBox
         div#content.container.showgrid2
           block content
@@ -20,7 +21,8 @@ html(lang = "en")
         div#footer
           div#footerContainer.container
             div#footerLinks.row.right
+              h3 &nbsp;
               block footerLinks
-                a(href="/").span1 Home
+                a(href="/", title="Home").span1 Home
             
 

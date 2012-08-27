@@ -74,6 +74,10 @@ function generatePassword(len, useSpecials, cb){
 }
 
 function sanitizeUrl(t){
+    if (!t)
+    {
+	return undefined;
+    }
     // TODO proper schema validation
     if (t.indexOf("http://") == -1 && 
 	t.indexOf("https://") == -1 &&

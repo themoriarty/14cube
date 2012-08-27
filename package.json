@@ -7,5 +7,8 @@
     , "jade": ">= 0.0.1"
     , "mongoskin": ">= 0.3"
     , "connect-mongo": ">= 0.1"
+    , "nodemailer": ">= 0.3.20"
+    , "validator": ">= 0.4.9"
+    , "express-validator": ">= 0.2.1"
   }
 }

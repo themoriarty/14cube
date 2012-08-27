@@ -39,7 +39,7 @@ html, body {
 .center{
     text-align: center;
 }
-/*
+
 #content{
     margin-top: 5em;
     margin-bottom: 1em;
@@ -47,7 +47,7 @@ html, body {
 #contentBox{
     padding: 1em 1em 5em;
 }
-*/
+
 .newRecordBody .control-group{
     display: inline-block; 
     vertical-align: top;
@@ -58,6 +58,9 @@ html, body {
     min-width:100%;
     background: none repeat scroll 0% 0% rgb(102, 102, 102);
     margin-top: 0em;
+}
+#footerLinks > h3{
+    display: inline;
 }
 #footer{
     position: absolute;

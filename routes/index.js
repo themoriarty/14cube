@@ -1,10 +1,12 @@
 var crypto = require('crypto');
 
 module.exports = function(settings, storage){
-    var auth = require("./auth")(settings);
-
     function Routes(){
     };
+
+    var Auth = require("./auth")(settings);
+    var auth = new Auth();
+    Routes.prototype.signup = auth.signup;
     Routes.prototype.index = function(req, res){
 	if (!req.session || !req.session.username){
 	    res.render("login", {title: "Login", token: req.session._csrf});
@@ -19,7 +21,7 @@ module.exports = function(settings, storage){
 	req.session._csrf = undefined;
 	username = req.param("username")
 	password = req.param("password")
-	new auth().checkAuth(username, password, function(ok, result){
+	auth.checkAuth(username, password, function(ok, result){
 	    if (ok){
 		req.session["username"] = username;
 		req.session["args"] = result;

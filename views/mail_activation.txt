@@ -1,0 +1,4 @@
+Hi,
+
+Please follow this link to activate your 14cube account: %s
+

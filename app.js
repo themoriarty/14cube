@@ -1,4 +1,5 @@
 var express = require("express");
+var expressValidator = require("express-validator");
 var settings = require("./settings")
 var Storage = require("./storage")(settings);
 storage = new Storage()
@@ -17,6 +18,7 @@ app.configure(function(){
     app.use(express.cookieParser(settings.secret));
     app.use(express.session({secret: settings.secret, cookie: {maxAge: 3600 * 10 * 1000}, proxy: false, store: new MongoStore(settings.db)}))
     app.use(express.bodyParser());
+    app.use(expressValidator);
     app.use(express.csrf());
     app.use(express.methodOverride());
     app.use(app.router);
@@ -35,6 +37,7 @@ app.configure('production', function(){
 r = new Routes();
 app.get('/', r.index);
 app.post('/login', r.login);
+app.post('/signup', r.signup);
 app.post('/logout', r.logout);
 app.get('/authFailed', r.authFailed);
 app.get("/get", r.get);

@@ -1,42 +1,39 @@
 !!!
 extends layout
 block append scripts
-	script.
-		function refreshTicket(){
-			$.get("/rnd", {bytes: 0}, function(data){
-				$("input[name=_csrf]").attr("value", data.token);
-				$("input[type=submit]").removeAttr("disabled");
-				$("form").submit();
-			});
-		}
-		$(document).ready(function(){
-			$("input[type=submit]").click(function(e){
-				$(this).attr("disabled", "disabled");
-				refreshTicket();
-				return false;
-			});	
-		});
+	script(src='/javascripts/bootstrap-tab.js')
+	script(src='/javascripts/login.js')
 
 block content
-	div#signIn.span6
-		h1 Sign in
-		form(method="POST", action="/login")#loginForm.well.form-inline
-			div.userinput
-				input(type="text", name="username", placeholder="Username").input-large
-			div.userinput
-				input(type="password", name="password", placeholder="Password").input-large
-			input(type="hidden", name="_csrf")
-			input(type="submit", value="Sign in").btn
-	div#signUp.span6
-		h1 Sign up
-		form(method="POST", action="/login")#loginForm.well.form-inline
-			div.userinput
-				input(type="text", name="username", placeholder="Username").input-large
-			div.userinput
-				input(type="password", name="password", placeholder="Password").input-large
-			div.userinput
-				input(type="password", name="password", placeholder="Repeat password").input-large
-			input(type="hidden", name="_csrf")
-			input(type="submit", value="Sign in").btn
+	div.tabbable.span-6
+		ul.nav.nav-tabs
+			li.active
+				a(href="#signIn") Sign in
+			li
+				a(href="#signUp") Sign up
+		div.tab-content
+			div.tab-pane.active.span6#signIn
+				//h1 Sign in
+				form(method="POST", action="/login")#loginForm.well.form-inline
+					div.control-group
+						input(type="text", name="username", placeholder="Email").input-large
+					div.control-group
+						input(type="password", name="password", placeholder="Password").input-large
+					input(type="hidden", name="_csrf")
+					input(type="submit", value="Sign in").btn
+			div.tab-pane.span6#signUp
+				//h1 Sign up
+				form(method="POST", action="/signup")#loginForm.well.form-inline
+					div.control-group
+						input(type="text", name="semail", placeholder="Email").input-large
+						span.help-inline
+					div.control-group
+						input(type="password", name="spassword", placeholder="Password, minumum 10 symbols").input-large
+						span.help-inline
+					div.control-group
+						input(type="password", name="spassword2", placeholder="Repeat password").input-large
+						span.help-inline
+					input(type="hidden", name="_csrf")
+					input(type="submit", value="Sign up").btn
 
 		
