@@ -59,7 +59,7 @@ function generatePassword(len, useSpecials, cb){
 	for (var c = "".charCodeAt('a'); c <= "".charCodeAt('z'); ++c){
 	    symbols += String.fromCharCode(c);
 	}
-	symbols += String.toUpperCase(symbols);
+	symbols += symbols.toUpperCase();
 	for (var c = "".charCodeAt('0'); c <= "".charCodeAt('9'); ++c){
 	    symbols += String.fromCharCode(c);
 	}
