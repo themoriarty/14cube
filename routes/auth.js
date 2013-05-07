@@ -56,10 +56,11 @@ module.exports = function(settings){
 		{
 		    listKey = crypto.randomBytes(40).toString("hex");
 		    salt = crypto.randomBytes(40).toString("hex");
-		    connection.collection("users").insert({"_id": {"username": username},
+		    /*connection.collection("users").insert({"_id": {"username": username},
 							   "password": key, 
 							   "listKey": listKey,
 							   "salt": salt});
+		    */
 		    cb(false);
 		    return;
 		}

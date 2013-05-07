@@ -203,7 +203,7 @@ MainController.prototype.start = function(){
 };
 
 function getPassword(cb){
-    return cb("this is my password");
+    //return cb("this is my password");
     $("#templates .passwordBox").clone().appendTo("#content");
     $("#content .storagePassword").focus();
     $("#content .storagePasswordForm").submit(function(){
