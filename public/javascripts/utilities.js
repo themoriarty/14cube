@@ -56,11 +56,11 @@ function generatePassword(len, useSpecials, cb){
 	}
     } else
     {
-	for (var c = "".charCodeAt('a'); c <= "".charCodeAt('z'); ++c){
+	for (var c = "a".charCodeAt(0); c <= "z".charCodeAt(0); ++c){
 	    symbols += String.fromCharCode(c);
 	}
 	symbols += symbols.toUpperCase();
-	for (var c = "".charCodeAt('0'); c <= "".charCodeAt('9'); ++c){
+	for (var c = "0".charCodeAt(0); c <= "9".charCodeAt(0); ++c){
 	    symbols += String.fromCharCode(c);
 	}
     }
