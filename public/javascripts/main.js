@@ -40,6 +40,7 @@ MainController.prototype.newObject = function(obj, onSuccess){
 };
 MainController.prototype.createControls = function(){
     var self = this;
+    $(".saveOffline").click(function() {saveOffline(self._ckey);});
     $("#templates > .newRecord").clone().appendTo("#controls");
     $("#controls .add").click(function(){
 	reportUserError("");
@@ -208,31 +209,24 @@ function getPassword(cb){
     $("#content .storagePassword").focus();
     $("#content .storagePasswordForm").submit(function(){
 	var pass = $(this).find(".storagePassword").attr("value");
-	$("#content .passwordBox").remove();
+	$("#content > .passwordBox").remove();
 	cb(pass);
 	return false;
     });
 }
 
 function main(){
-    $.getScript("/javascripts/crypto/rollups/aes.js", function(){
-	$.getScript("/javascripts/crypto/rollups/pbkdf2.js", function(){
-	    $(".logOut").click(function(){
-		getToken(function(token){
-		    $.post("/logout", {"_csrf": token}, function(){
-			location.reload();
-		    });
-		});
-		return false;
-	    });
-	    getPassword(function(password){
-		var ckey = CryptoJS.PBKDF2(password, salt, { keySize: 256/32, iterations: 1000 });
-		var m = new MainController(ckey);
-		m.start();
+    $(".logOut").click(function(){
+	getToken(function(token){
+	    $.post("/logout", {"_csrf": token}, function(){
+		location.reload();
 	    });
 	});
+	return false;
+    });
+    getPassword(function(password){
+	var ckey = CryptoJS.PBKDF2(password, salt, { keySize: 256/32, iterations: 1000 });
+	var m = new MainController(ckey);
+	m.start();
     });
 };
-
-
-$(document).ready(function(){main();});

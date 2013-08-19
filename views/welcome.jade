@@ -1,13 +1,17 @@
-!!!
 extends layout
 block append scripts
+	script(src='/javascripts/crypto/rollups/aes.js')
+	script(src='/javascripts/crypto/rollups/pbkdf2.js')
 	script(src='/javascripts/main.js')
+	script(src='/javascripts/offline.js')
 	script.
-		var listKey = "#{args.listKey};"
-		var salt = "#{args.salt};"
+		var listKey = "#{args.listKey};";
+		var salt = "#{args.salt};";
+		$(document).ready(function(){main();});
 
 block append footerLinks
-	a(href="/", title="Log out").logOut.span1 Log out
+	a(href="#", title="Log out").logOut.span1 Log out
+	a(href="#", title="Save offline").saveOffline.span2 Save offline
 
 block content
 	div#controls

@@ -1,10 +1,23 @@
+function isOffline(){
+    try{
+	if (g_isOffline){
+	    return true;
+	}
+    } catch (e){
+    }
+    return false;
+}
+
 function randomString(len, cb){
+    if (isOffline()){
+	return reportOffline();
+    }
     $.get("/rnd", {bytes: len}, function(data){
 	cb(data.iv, data.token);
     });
 }
 function get(ckey, key, cb){
-    $.get("/get", {key: key}, function(data){
+    function onData(data){
 	if (data && data.value){
 	    obj = JSON.parse(data.value);
 	    iv = CryptoJS.enc.Hex.parse(obj.iv);
@@ -18,9 +31,19 @@ function get(ckey, key, cb){
 	    return;
 	}
 	cb(undefined, undefined);
-    }, "json");
+    }
+
+    if (isOffline()){
+	onData(g_data[key]);
+    } else{
+	$.get("/get", {key: key}, onData, "json");
+    }
 }
 function put(ckey, key, value, cb){
+    if (isOffline()){
+	return reportOffline();
+    }
+
     randomString(20, function(ivStr, token){
 	iv = CryptoJS.enc.Hex.parse(ivStr);
 	encodedValue = CryptoJS.AES.encrypt(JSON.stringify(value), ckey, {iv: iv}).toString();
@@ -33,12 +56,20 @@ function put(ckey, key, value, cb){
     return;
 }
 function getToken(cb){
+    if (isOffline()){
+	return reportOffline();
+    }
+
     $.get("/rnd", {bytes: 0}, function(data){
 	cb(data.token);
     });
 }
 
 function purge(ckey, key, cb){
+    if (isOffline()){
+	return reportOffline();
+    }
+
     $.get("/rnd", {bytes: 0}, function(data){
 	console.log(key);
 	$.post("/purge", {key: key,
@@ -96,4 +127,10 @@ function reportError(msg){
 function reportUserError(msg){
     $("#controls .userError").text(msg);
     return false;
+}
+
+function reportOffline(){
+    var errText = "Can't do that in offline mode";
+    reportError(errText);
+    return errText;
 }

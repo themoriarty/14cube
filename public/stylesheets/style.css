@@ -9,10 +9,10 @@ html, body {
     position: relative;
     min-height:100%;
 }
-/*a {
+a {
   color: #00B7FF;
   text-decoration: none;
-}*/
+}
 #templates{
     display: none;
 }
@@ -59,12 +59,14 @@ html, body {
     background: none repeat scroll 0% 0% rgb(102, 102, 102);
     margin-top: 0em;
 }
-#footerLinks > h3{
-    display: inline;
+
+#footerLinks{
+    margin: 0px;
 }
 #footer{
     position: absolute;
     bottom: 0px;
+    font-weight:bold;
 }
 .box {
     background: rgb(230, 230, 230);
