@@ -37,6 +37,17 @@ module.exports = function(settings){
 	//});
 	res.json(200, {"result": "ok"});
     };
+    notEquals = function(s1, s2){
+       if (s1.length != s2.length){
+	return false;
+       }
+       for (var i = 0; i < s1.length; ++i){
+	if (s1[i] != s2[i]){
+		return false;
+        }
+       }
+       return true;
+    }
     Auth.prototype.checkAuth =  function(username, password, cb)
     {
 	crypto.pbkdf2(password, username, 10000, 1024, function(err, key) {
@@ -45,14 +56,13 @@ module.exports = function(settings){
 		cb(false);
 		return;
 	    }
-	    connection.collection("users").findOne({"_id": {"username": username}, "password": key}, function(err, obj){
+	    connection.collection("users").findOne({"_id": {"username": username}/*, "password": key.toString()*/}, function(err, obj){
 	    if (err){
 		console.error(err);
 		cb(false);
 		return;
-	    }
-		// console.dir(obj);
-		if (!obj)
+	    };
+		if (!obj || notEquals(obj.password, key))
 		{
 		    listKey = crypto.randomBytes(40).toString("hex");
 		    salt = crypto.randomBytes(40).toString("hex");
