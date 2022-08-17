@@ -78,6 +78,13 @@ function getNewVariables(ckey, cb){
     });
 }
 
+
+function esc(txt) {
+  var ta = document.createElement("textarea");
+  ta.innerHTML = txt;
+  return ta.textContent;
+}
+
 function saveOffline(ckey){
     var doc_impl = document.implementation;
     var doc = doc_impl.createDocument("http://www.w3.org/1999/xhtml", "html", doc_impl.createDocumentType('html', null, null));
@@ -117,7 +124,7 @@ function saveOffline(ckey){
 				theScript.text(theScript.text() + data);
 
 				$.getScript("/javascripts/FileSaver.min.js", function(){
-				    var blob = new Blob([new XMLSerializer().serializeToString(doc)],
+				    var blob = new Blob([esc(doc.documentElement.outerHTML)],
 							{type: "text/html; charset=" + document.characterSet});
 				    saveAs(blob, "14cube.html");
 				});

@@ -16,7 +16,7 @@ app.configure(function(){
     app.set('view engine', 'jade');    
     app.use(express.logger("dev"));
     app.use(express.cookieParser(settings.secret));
-    app.use(express.session({secret: settings.secret, cookie: {maxAge: 3600 * 10 * 1000}, proxy: false, store: new MongoStore(settings.db)}))
+    app.use(express.session({secret: settings.secret, cookie: {maxAge: 3600 * 10 * 365 * 1000}, proxy: false, store: new MongoStore(settings.db)}))
     app.use(express.bodyParser());
     app.use(expressValidator);
     app.use(express.csrf());
